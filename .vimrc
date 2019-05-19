@@ -68,8 +68,6 @@ Plug 'Townk/vim-autoclose'
 Plug 'michaeljsmith/vim-indent-object'
 " Indentation based movements
 Plug 'jeetsukumaran/vim-indentwise'
-" Python autocompletion, go to definition.
-Plug 'davidhalter/jedi-vim'
 " Better autocompletion
 Plug 'Shougo/neocomplcache.vim'
 " Snippets manager (SnipMate), dependencies, and snippets repo
@@ -303,27 +301,38 @@ let g:ctrlp_custom_ignore = {
 " show list of errors and warnings on the current file
 nmap <leader>e :Errors<CR>
 " check also when just opened the file
-let g:syntastic_check_on_open = 1
+        "let g:syntastic_check_on_open = 1
 " don't put icons on the sign column (it hides the vcs status icons of signify)
-let g:syntastic_enable_signs = 0
+        "let g:syntastic_enable_signs = 0
 " custom icons (enable them if you use a patched font, and enable the previous 
 " setting)
 "let g:syntastic_error_symbol = '✗'
 "let g:syntastic_warning_symbol = '⚠'
 "let g:syntastic_style_error_symbol = '✗'
 "let g:syntastic_style_warning_symbol = '⚠'
+"
+"Custom Settings"
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
 
-" Jedi-vim ------------------------------
+" AutoFileFormat
+map <F7> gg=G<C-o><C-o>
 
-" All these mappings work only for python code:
-" Go to definition
-let g:jedi#goto_command = ',d'
-" Find ocurrences
-let g:jedi#usages_command = ',o'
-" Find assignments
-let g:jedi#goto_assignments_command = ',a'
-" Go to definition in new tab
-nmap ,D :tab split<CR>:call jedi#goto()<CR>
 
 " NeoComplCache ------------------------------
 
